@@ -1,0 +1,26 @@
+services:
+  llava-app:
+    build: ./
+    image: llava
+    container_name: llava
+    volumes:
+      - .:/myapp
+    ports:
+      - 8888:8888 # Jupyter Lab
+      - 7860:7860
+      - 2222:22 # SSH
+    command: >
+      bash -c "service ssh start && jupyter lab --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.allow_origin='*'"
+    stdin_open: true
+    tty: true
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+

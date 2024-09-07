@@ -1,0 +1,11 @@
+###### Requirements without Version Specifiers ######
+torch
+accelerate
+protobuf
+gradio
+jupyterlab
+#
+###### Requirements with Version Specifiers ######
+#   See https://www.python.org/dev/peps/pep-0440/#version-specifiers
+transformers==4.37.2
+fastapi==0.112.2
